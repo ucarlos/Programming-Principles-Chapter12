@@ -1,0 +1,74 @@
+#+TITLE: Chapter 21 Review
+#+AUTHOR: Ulysses Carlos
+#+DATE: <2020-09-19 Sat>
+#+OPTIONS: toc:nil
+#+latex_class_options: [12pt]
+#+LaTeX_HEADER: \usepackage[T1]{fontenc}
+#+LaTeX_HEADER: \usepackage{mathpazo}
+#+LaTeX_HEADER: \linespread{1.05}
+#+LaTeX_HEADER: \usepackage[scaled]{helvet}
+#+LaTeX_HEADER: \usepackage{courier}
+# ------------------------------------------------------------------------------
+# HTML
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-readtheorg.setup
+#+HTML_HEAD: <style>#content{max-width:1000px;}</style>
+#+HTML_HEAD: <style>p{max-width:800px;}</style>
+#+HTML_HEAD: <style>li{max-width:800px;}</style>
+# ------------------------------------------------------------------------------
+* Questions
+** Why do we use graphics?
+One reason could be that using graphics (Or a GUI) is more user-friendly for a program that a text-based user interface.
+** When do we try not to use graphics?
+I suppose that a good reason is that the system does not have sufficient resources to display a UI (Such as an Embedded System) and if the text-based user interface can properly manage all the user's needs in a understandable way.
+** Why is graphics interesting for a programmer?
+Graphic libraries provides plenty of code to read, and are a good introduction to object-oriented programming. They also provide a good source of design examples.
+** What is a window?
+A window is a region of space that we preform graphic operations on, such as adding various objects such as polygons and text.
+** In which namespace do we keep our graphics interface classes (our Graphics library)?
+We keep our graphic library in the Graph\textunderscore lib namespace.
+** What header files do you need to do basic graphics using our graphics library?
+#+begin_src c++
+#include "Simple_window.h"
+#include "Graph.h"
+#include "GUI.h"
+#include "Window.h"
+#+end_src
+** What the simplest window to use?
+You can use Simple_window from "Simple_window.h", which provides a window, alongside a "Next" button to end the process. You simply need a point, the width and height of the window alongside a label for the window.
+** What is the minimal window?
+You can create the minimal window like so:
+#+begin_src c++
+#include "Window.h"
+int main(void){
+    Window w{640, 480, "Sample Title"};
+    gui_main();
+}
+#+end_src
+
+** What's a window label?
+A window label is text associated with the name of a particular window. The text is usually shown when the programming is running.
+** How do you label a window?
+You can label a window while calling the window's constructor
+#+begin_src c++
+    Window w{640, 480, "Window Label"};
+    // You can rename the window using set_label:
+    w.set_label(string{"Another Window Label"});
+#+end_src
+** How do screen coordinates work? Window coordinates? Mathematical coordinates?
+Computer screens are essentially rectangles of pixels, which can display a range of colors. While working with widows, the origin point (0, 0) is at the top left of the window. This is different from mathematical coordinates, where the origin (0, 0) is at the intersection of the x and y axes (At the center usually)
+** What are examples of simple "shapes" that we can display?
+Some shapes that we can display are polygons, circles, ellipses, rectangles and lines.
+** Which basic shape would you use to draw a hexagon?
+I would use a polygon and add 6 different points to create a hexagon. 
+** How do you write text somewhere in a window?
+You create a text object and then attach it to a window.
+** How would you put a photo of your best friend in a window (using a program you wrote yourself)?
+I would first create an Image object specifying the location and the image filename, and then attach it to a window object.
+** You made a Window object, but nothing appears on your screen. What are some possible reasons for that?
+It could be that you did not call
+#+begin_src c++
+    wait_for_button()
+#+end_src
+or that your window size is too small to display the objects you attached to the window.
+** You have made a shape, but it doesn't appear in the window. What are some possible reasons for that?
+You could have forgotten to attach it to the appropriate window, or that the shape is outside the dimensions of the window it is attached to.
